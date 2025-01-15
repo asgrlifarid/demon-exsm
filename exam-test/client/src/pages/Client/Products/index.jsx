@@ -9,6 +9,8 @@ import { toggleFavorites } from "../../../redux/features/whisListSlice";
 
 const Products = () => {
   const { data, isLoading, isError, refetch } = useGetProductsQuery();
+
+
   const wishlist = useSelector((state) => state.wishlist);
       const dispatch = useDispatch();
  
@@ -36,7 +38,7 @@ const Products = () => {
                   dispatch(toggleFavorites(p._id));
                 }}
               >
-                {!wishlist?.items.find((q) => q.id === p.id) ? (
+                {wishlist?.items.find((q) => q.id === p._id) ? (
                   <FaHeart />
                 ) : (
                   <CiHeart />

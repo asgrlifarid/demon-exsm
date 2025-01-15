@@ -1,13 +1,23 @@
 import React from "react";
 import { useGetProductsQuery } from "../../../redux/services/productsApi";
-import styles from "./index.module.scss"
+import styles from "./index.module.scss";
+
+import { FaHeart } from "react-icons/fa";
+import { CiHeart } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavorites } from "../../../redux/features/whisListSlice";
+
 const Products = () => {
   const { data, isLoading, isError, refetch } = useGetProductsQuery();
+  const wishlist = useSelector((state) => state.wishlist);
+      const dispatch = useDispatch();
+ 
 
-  return <div className={styles.firstDiv}>
-    {isLoading && <h1>Loading ...</h1>}
-    {isError && <h1> Error Taken</h1>}
-    {data &&
+  return (
+    <div className={styles.firstDiv}>
+      {isLoading && <h1>Loading ...</h1>}
+      {isError && <h1> Error Taken</h1>}
+      {data &&
         data.data.map((p) => (
           <div className={styles.card} key={p._id}>
             <div>
@@ -20,10 +30,23 @@ const Products = () => {
             <div>
               <p>price : ${p.price}</p>
             </div>
-            
+            <div>
+              <button
+                onClick={() => {
+                  dispatch(toggleFavorites(p._id));
+                }}
+              >
+                {!wishlist?.items.find((q) => q.id === p.id) ? (
+                  <FaHeart />
+                ) : (
+                  <CiHeart />
+                )}
+              </button>
+            </div>
           </div>
         ))}
-  </div>;
+    </div>
+  );
 };
 
 export default Products;

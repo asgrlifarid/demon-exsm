@@ -1,0 +1,37 @@
+.upper{
+    display: flex;
+    justify-content: space-around;
+    .upperDivs{
+        width: 250px;
+    }
+    .upperDivsInput{
+        margin-top: 50px;
+        .search{
+            width: 300px;
+            height: 30px;
+            border: none;
+        }
+    }
+}
+.shoppers{
+    
+    border:  3px solid black;
+    font-size: 30px;
+    padding: 1%;
+    text-align: center;
+}
+.lower{
+    display: flex;
+    justify-content: space-around;
+    nav {
+        ul{
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            a{
+                text-decoration: none;
+                list-style-type: none;
+            }
+        }
+    }
+}
